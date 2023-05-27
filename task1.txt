@@ -1,0 +1,57 @@
+import java.util.*;
+
+class SurveySystem {
+    private static Set<String> registeredCustomers = new HashSet<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Online Survey System!");
+
+        // User registration
+        System.out.print("Enter your email address to register: ");
+        String email = scanner.nextLine();
+        registerCustomer(email);
+
+        // User login
+        System.out.print("Enter your email address to login: ");
+        String loginEmail = scanner.nextLine();
+
+        if (isRegisteredCustomer(loginEmail)) {
+            System.out.println("Login successful. You can now submit your answers.");
+
+            // Survey questions
+            System.out.println("Please answer the following questions:");
+
+            System.out.print("Q1. What is your age? ");
+            String answer1 = scanner.nextLine();
+
+            System.out.print("Q2. How likely are you to recommend our products/services? ");
+            String answer2 = scanner.nextLine();
+
+            // Save answers to the database or perform necessary actions
+            saveSurveyAnswers(loginEmail, answer1, answer2);
+
+            System.out.println("Thank you for submitting your answers!");
+        } else {
+            System.out.println("Login failed. Please register as a customer.");
+        }
+
+        scanner.close();
+    }
+
+    private static void registerCustomer(String email) {
+        registeredCustomers.add(email);
+        System.out.println("Registration successful!");
+    }
+
+    private static boolean isRegisteredCustomer(String email) {
+        return registeredCustomers.contains(email);
+    }
+
+    private static void saveSurveyAnswers(String email, String answer1, String answer2) {
+        // Save the survey answers to the database or perform necessary actions
+        System.out.println("Saving survey answers for customer: " + email);
+        System.out.println("Answer 1: " + answer1);
+        System.out.println("Answer 2: " + answer2);
+    }
+}
